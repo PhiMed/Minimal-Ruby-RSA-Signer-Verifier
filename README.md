@@ -16,10 +16,9 @@ This is an absolute bare-bones pure Ruby application that will perform RSA signi
 **To use:**
 
 From the command line:
+(while at the top level directory of this application)
 
 * To create a signature for a file:
-
-  (while at the top level directory of this application)
 
   `$ruby runner.rb sign <<path_to_file_you_wish_to_sign.txt>>`
 
