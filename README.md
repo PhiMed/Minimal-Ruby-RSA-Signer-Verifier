@@ -19,6 +19,8 @@ From the command line:
 
 * To create a signature for a file:
 
+  (while at the top level directory of this application)
+
   `$ruby runner.rb sign <<path_to_file_you_wish_to_sign.txt>>`
 
   Application will create a new text file (named `<<original name>>_signature.txt` using the _private_ key and save it (in the top level directory of this app).
