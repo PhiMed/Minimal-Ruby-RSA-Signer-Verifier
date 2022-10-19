@@ -1,3 +1,5 @@
+![cesar-couto-xUpbmUINv9o-unsplash](https://user-images.githubusercontent.com/87627363/196723379-66f5cdd9-bbb8-4eb0-b0aa-5620ecc4317d.jpg)
+
 This is an absolute bare-bones pure Ruby application that will perform RSA signing and signature verification of user provided text files via the command line. 
 
 **Setup:**
@@ -29,3 +31,7 @@ From the command line
   `$ruby runner.rb verify <<path_to_original_file_you_wish_to_verifyt>>.txt <<path_to_signature_for_that_original_file>>.txt`
 
   Application will verify the signature/original file combo using the _public_ key, and return `true` if can be verified and `false` in all other scenarios.
+
+
+Photo by <a href="https://unsplash.com/@xcrap?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">César Couto</a> on <a href="https://unsplash.com/s/photos/drops?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
