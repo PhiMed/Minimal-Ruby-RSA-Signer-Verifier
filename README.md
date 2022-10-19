@@ -7,7 +7,8 @@ This is an absolute bare-bones pure Ruby application that will perform RSA signi
 * Generate your own RSA private/public key pair and save them in the correspondingly named files inside this app automically by running these two commands from the top level directory for the app.
 
   `$openssl genrsa -out lib/private.key 2048`
-  `$openssl rsa -pubout -in path/to/private.key -out lib/public.key`
+  
+  `$openssl rsa -pubout -in lib/private.key -out lib/public.key`
 
   (or insert your own existing keys)
 
