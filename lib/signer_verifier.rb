@@ -20,8 +20,17 @@ class SignerVerifier
 
   private 
 
+  def rsa_key(key)
+    OpenSSL::PKey::RSA.new(key)
+  end
+
   def signature
-    Base64.encode64(rsa_key(private_key).sign(OpenSSL::Digest::SHA1.new, file_contents(user_provided_file)))
+    Base64.encode64(
+      rsa_key(private_key).sign(
+        OpenSSL::Digest::SHA1.new, 
+        file_contents(user_provided_file)
+        )
+      )
   end
 
   # Returns boolean
@@ -31,6 +40,13 @@ class SignerVerifier
       Base64.decode64(file_contents(user_provided_signatue)), 
       file_contents(user_provided_file)
     )
+  end
+
+  def file_contents(path)
+    file = File.open(path)
+    results = file.read
+    file.close
+    results
   end
   
   def write_to_file(string, path)
@@ -42,13 +58,6 @@ class SignerVerifier
   def signature_output_file_path
     "#{user_provided_file.chomp('.txt')}_signature.txt"
   end
-
-  def file_contents(path)
-    file = File.open(path)
-    results = file.read
-    file.close
-    results
-  end
   
   def public_key
     File.read("lib/public.key")
@@ -56,9 +65,5 @@ class SignerVerifier
 
   def private_key
     File.read("lib/private.key")
-  end
-
-  def rsa_key(key)
-    OpenSSL::PKey::RSA.new(key)
   end
 end
