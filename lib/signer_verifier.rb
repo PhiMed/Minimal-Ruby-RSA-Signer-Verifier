@@ -9,23 +9,34 @@ class SignerVerifier
   end
 
   def sign
-    signature = EncryptoSigno.sign(private_key, file_contents(user_provided_file))
-    file = File.new(signature_output_file_path, mode: "w")
-    file.write(signature)
-    file.close
+    write_to_file(signature, signature_output_file_path)
     puts "#{user_provided_file} was signed using private key, signature saved as #{signature_output_file_path}"
   end
 
   # Returns boolean
   def verify
-    puts EncryptoSigno.verify(
+    puts verification
+  end
+
+  private 
+
+  def signature
+    EncryptoSigno.sign(private_key, file_contents(user_provided_file))
+  end
+
+  def verification
+    EncryptoSigno.verify(
       public_key, 
       file_contents(user_provided_signatue), 
       file_contents(user_provided_file)
     )
   end
 
-  private 
+  def write_to_file(string, path)
+    file = File.new(path, mode: "w")
+    file.write(string)
+    file.close
+  end
 
   def signature_output_file_path
     "#{user_provided_file.chomp('.txt')}_signature.txt"
