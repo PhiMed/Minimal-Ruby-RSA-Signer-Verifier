@@ -2,6 +2,8 @@
 
 This is an absolute bare-bones pure Ruby application that will perform RSA signing and signature verification of user provided text files via the command line. 
 
+Some methods used here are borrowed from the archived [EncryptoSigno Gem](https://github.com/krystal/encrypto-signo)
+
 **Setup:**
 
 * Generate your own RSA private/public key pair and save them in the correspondingly named files inside this app automically by running these two commands from the top level directory for the app.
