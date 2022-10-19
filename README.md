@@ -11,10 +11,6 @@ This is an absolute bare-bones pure Ruby application that will perform RSA signi
 
   (or insert your own existing keys)
 
-* Install dependencies: 
-
-  `$gem install encrypto_signo` , `bundle install`
-
 **To use:**
 
 From the command line
