@@ -1,4 +1,5 @@
-require 'encrypto_signo'
+require 'openssl'
+require 'base64'
 
 class SignerVerifier
   attr_accessor :user_provided_file, :user_provided_signatue
@@ -13,7 +14,6 @@ class SignerVerifier
     puts "#{user_provided_file} was signed using private key, signature saved as #{signature_output_file_path}"
   end
 
-  # Returns boolean
   def verify
     puts verification
   end
@@ -21,17 +21,18 @@ class SignerVerifier
   private 
 
   def signature
-    EncryptoSigno.sign(private_key, file_contents(user_provided_file))
+    Base64.encode64(rsa_key(private_key).sign(OpenSSL::Digest::SHA1.new, file_contents(user_provided_file)))
   end
 
+  # Returns boolean
   def verification
-    EncryptoSigno.verify(
-      public_key, 
-      file_contents(user_provided_signatue), 
+    rsa_key(public_key).verify(
+      OpenSSL::Digest::SHA1.new, 
+      Base64.decode64(file_contents(user_provided_signatue)), 
       file_contents(user_provided_file)
     )
   end
-
+  
   def write_to_file(string, path)
     file = File.new(path, mode: "w")
     file.write(string)
@@ -55,5 +56,9 @@ class SignerVerifier
 
   def private_key
     File.read("lib/private.key")
+  end
+
+  def rsa_key(key)
+    OpenSSL::PKey::RSA.new(key)
   end
 end
